@@ -1,38 +1,42 @@
 import { assertEquals } from "assert";
 import { puzzleInput } from "./input02.ts";
 import { Game, gameValue, getGame, part1, part2, power } from "./day02.ts";
+import { describe, it } from "bdd";
 
-Deno.test("getGame parses", () => {
-  assertEquals(
-    getGame(
-      "Game 2: 3 green, 18 blue; 14 green, 4 red, 2 blue; 3 red, 14 green, 15 blue",
-    ),
-    game2,
-  );
+describe("day2 part1", () => {
+  const part1Bag = { red: 12, green: 13, blue: 14 };
+  it("parses", () => {
+    assertEquals(
+      getGame(
+        "Game 2: 3 green, 18 blue; 14 green, 4 red, 2 blue; 3 red, 14 green, 15 blue",
+      ),
+      game2,
+    );
+  });
+
+  it("values possible games", () => {
+    assertEquals(gameValue({ red: 4, green: 14, blue: 18 }, game2), 2);
+    assertEquals(gameValue({ red: 4, green: 14, blue: 17 }, game2), 0);
+  });
+
+  it("solves the puzzle", () => {
+    assertEquals(part1(part1Bag, puzzleInput), 2237);
+  });
 });
 
-Deno.test("gameValue values possible games", () => {
-  assertEquals(gameValue({ red: 4, green: 14, blue: 18 }, game2), 2);
-  assertEquals(gameValue({ red: 4, green: 14, blue: 17 }, game2), 0);
-});
+describe("day2 part2", () => {
+  it("computes power", () => {
+    const game1 = getGame(sampleInput.split("\n")[0]);
+    assertEquals(power(game1), 48);
+  });
 
-export const part1Bag = { red: 12, green: 13, blue: 14 };
+  it("solves the example", () => {
+    assertEquals(part2(sampleInput), 2286);
+  });
 
-Deno.test("part1 solves", () => {
-  assertEquals(part1(part1Bag, puzzleInput), 2237);
-});
-
-Deno.test("power computes", () => {
-  const game1 = getGame(sampleInput.split("\n")[0]);
-  assertEquals(power(game1), 48);
-});
-
-Deno.test("part2 works for the example", () => {
-  assertEquals(part2(sampleInput), 2286);
-});
-
-Deno.test("part2 works for the puzzle", () => {
-  assertEquals(part2(puzzleInput), 66681);
+  it("solves the puzzle", () => {
+    assertEquals(part2(puzzleInput), 66681);
+  });
 });
 
 const game2: Game = {
