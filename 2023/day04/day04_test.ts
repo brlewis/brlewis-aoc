@@ -1,6 +1,12 @@
 import { describe, it } from "bdd";
 import { expect } from "expect";
-import { cardWorth, matches, parseCard, pileWorth } from "./day04.ts";
+import {
+  cardWorth,
+  finalPileSize,
+  matches,
+  parseCard,
+  pileWorth,
+} from "./day04.ts";
 import { puzzleInput } from "./input04.ts";
 
 describe("day3 part1", () => {
@@ -9,6 +15,7 @@ describe("day3 part1", () => {
       .toEqual({
         winning: [41, 48, 83, 86, 17],
         mine: [83, 86, 6, 31, 17, 9, 48, 53],
+        copies: 1,
       });
   });
 
@@ -36,6 +43,20 @@ describe("day3 part1", () => {
     expect(
       pileWorth(puzzleInput),
     ).toBe(15268);
+  });
+});
+
+describe("day3 part2", () => {
+  it("determines final pile size", () => {
+    expect(
+      finalPileSize(sampleCards),
+    ).toBe(30);
+  });
+
+  it("solves the puzzle", () => {
+    expect(
+      finalPileSize(puzzleInput),
+    ).toBe(6283755);
   });
 });
 
