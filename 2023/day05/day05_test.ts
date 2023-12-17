@@ -1,6 +1,6 @@
 import { describe, it } from "bdd";
 import { expect } from "expect";
-import { followMap, parseAlmanac, part1, soils } from "./day05.ts";
+import { followMap, locations, parseAlmanac, part1, part2 } from "./day05.ts";
 import { input05 } from "./input05.ts";
 
 describe("day 5 part 1", () => {
@@ -20,8 +20,8 @@ describe("day 5 part 1", () => {
     expect(followMap(10, elfMap)).toBe(10);
   });
 
-  it("finds the expected soils", () => {
-    expect(soils(sampleAlmanac)).toEqual([82, 43, 86, 35]);
+  it("finds the expected locations", () => {
+    expect(locations(sampleAlmanac)).toEqual([82, 43, 86, 35]);
   });
 
   it("solves the example", () => {
@@ -29,7 +29,18 @@ describe("day 5 part 1", () => {
   });
 
   it("solves the puzzle", () => {
-    expect(part1(input05)).toBe(35);
+    expect(part1(input05)).toBe(825516882);
+  });
+});
+
+describe("day 5 part 2", () => {
+  it("solves the example", () => {
+    expect(part2(sampleAlmanac)).toBe(46);
+  });
+
+  // Takes a few minutes. Unskip only when needed.
+  it.skip("solves the puzzle", () => {
+    expect(part2(input05)).toBe(136096660);
   });
 });
 

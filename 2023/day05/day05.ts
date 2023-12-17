@@ -35,7 +35,7 @@ export function followMap(n: number, map: ElfMap[]): number {
   return n;
 }
 
-export function soils(str: string): number[] {
+export function locations(str: string): number[] {
   const almanac = parseAlmanac(str);
   return almanac.seeds.map((seed) => {
     let n = seed;
@@ -47,5 +47,22 @@ export function soils(str: string): number[] {
 }
 
 export function part1(str: string): number {
-  return soils(str).reduce((m, n) => Math.min(m, n), Number.MAX_VALUE);
+  return locations(str).reduce((m, n) => Math.min(m, n), Number.MAX_VALUE);
+}
+
+// PART 2
+
+export function part2(str: string): number {
+  const { seeds, maps } = parseAlmanac(str);
+  let min = Number.MAX_SAFE_INTEGER;
+  for (let i = 0; i < seeds.length; i += 2) {
+    for (let j = 0; j < seeds[i + 1]; j++) {
+      let n = seeds[i] + j;
+      for (let k = 0; k < maps.length; k++) {
+        n = followMap(n, maps[k]);
+      }
+      min = Math.min(min, n);
+    }
+  }
+  return min;
 }
