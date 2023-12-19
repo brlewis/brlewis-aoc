@@ -13,6 +13,10 @@ sandboxed.
 Almost as cool, is the minimal configuration. The `deno.json` here is much
 smaller than `package.json` in my 2020 repo.
 
+All of my solutions were made solely by me without looking at anyone else's. If
+I do look at anyone else's solution and get inspired to change mine, I'll give
+credit in comments.
+
 I don't know how many days I'll actually do in 2023, since I also have a lot of
 real work, but I've enjoyed the days I've solved so far.
 
