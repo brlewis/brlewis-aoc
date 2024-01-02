@@ -14,7 +14,7 @@ describe("day 7 part 1", () => {
     expect(hand.handType()).toBe(4);
   });
 
-  it("identifies full hosue", () => {
+  it("identifies full house", () => {
     const hand = new Hand("23332".split(""), 1);
     expect(hand.handType()).toBe(3.5);
   });
@@ -48,7 +48,7 @@ describe("day 7 part 1", () => {
   });
 
   it("solves the puzzle", () => {
-    expect(totalWinnings(input07)).toBe(6440);
+    expect(totalWinnings(input07)).toBe(248812215);
   });
 });
 
