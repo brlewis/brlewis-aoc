@@ -1,7 +1,6 @@
 import { describe, it } from "bdd";
 import { expect } from "expect";
 import { Hand, parse, totalWinnings } from "./day07.ts";
-import { input07 } from "./input07.ts";
 
 describe("day 7 part 1", () => {
   it("identifies 5 of a kind", () => {
@@ -43,12 +42,8 @@ describe("day 7 part 1", () => {
     expect(parse(sampleInput)[4].bid).toBe(483);
   });
 
-  it("solves the example", () => {
-    expect(totalWinnings(sampleInput)).toBe(6440);
-  });
-
-  it.skip("solves the puzzle", () => {
-    expect(totalWinnings(input07)).toBe(0);
+  it("solves the puzzle", () => {
+    expect(totalWinnings(puzzleInput || sampleInput)).toBe(6440);
   });
 });
 
@@ -57,3 +52,5 @@ T55J5 684
 KK677 28
 KTJJT 220
 QQQJA 483`;
+
+const puzzleInput = ``;
