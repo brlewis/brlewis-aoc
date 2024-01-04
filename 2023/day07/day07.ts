@@ -1,5 +1,9 @@
 export function rank(str: string) {
-  return "23456789TJQKA".indexOf(str);
+  return "*23456789TJQKA".indexOf(str);
+}
+
+export function wild(input: string) {
+  return input.replaceAll("J", "*");
 }
 
 export class Hand {
@@ -9,14 +13,24 @@ export class Hand {
   counts: number[];
 
   constructor(cards: string[], bid: number) {
+    let wildCount = 0;
     this.cards = cards;
     this.bid = bid;
     this.countMap = new Map();
     cards.forEach((card) => {
       this.countMap.set(card, 1 + (this.countMap.get(card) || 0));
+      if (card === "*") {
+        wildCount++;
+      }
     });
     this.counts = Array.from(this.countMap.values());
     this.counts.sort((a, b) => a - b);
+    if (wildCount && this.counts.length > 1) {
+      this.counts.splice(this.counts.indexOf(wildCount), 1);
+      this.counts[this.counts.length - 1] += wildCount;
+      let htype = this.handType();
+      console.log({ cards, htype });
+    }
   }
 
   handType(): number {
