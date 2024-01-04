@@ -16,7 +16,7 @@ export class Hand {
       this.countMap.set(card, 1 + (this.countMap.get(card) || 0));
     });
     this.counts = Array.from(this.countMap.values());
-    this.counts.sort();
+    this.counts.sort((a, b) => a - b);
   }
 
   handType(): number {
