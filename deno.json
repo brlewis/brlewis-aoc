@@ -3,5 +3,8 @@
     "assert": "https://deno.land/std@0.208.0/assert/mod.ts",
     "bdd": "https://deno.land/std@0.208.0/testing/bdd.ts",
     "expect": "https://deno.land/std@0.209.0/expect/mod.ts"
+  },
+  "tasks": {
+    "hook": "echo 'deno test' > .git/hooks/pre-commit && chmod +x .git/hooks/pre-commit"
   }
 }
