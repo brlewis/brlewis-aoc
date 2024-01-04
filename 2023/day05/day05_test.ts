@@ -1,7 +1,6 @@
 import { describe, it } from "bdd";
 import { expect } from "expect";
 import { followMap, locations, parseAlmanac, part1, part2 } from "./day05.ts";
-import { input05 } from "./input05.ts";
 
 describe("day 5 part 1", () => {
   it("parses the almanac", () => {
@@ -24,23 +23,15 @@ describe("day 5 part 1", () => {
     expect(locations(sampleAlmanac)).toEqual([82, 43, 86, 35]);
   });
 
-  it("solves the example", () => {
-    expect(part1(sampleAlmanac)).toBe(35);
-  });
-
-  it.skip("solves the puzzle", () => {
-    expect(part1(input05)).toBe(0);
+  it("solves the puzzle", () => {
+    expect(part1(puzzleInput || sampleAlmanac)).toBe(35);
   });
 });
 
 describe("day 5 part 2", () => {
-  it("solves the example", () => {
-    expect(part2(sampleAlmanac)).toBe(46);
-  });
-
-  // Takes a few minutes. Unskip only when needed.
-  it.skip("solves the puzzle", () => {
-    expect(part2(input05)).toBe(0);
+  // Takes a few minutes with real input.
+  it("solves the puzzle", () => {
+    expect(part2(puzzleInput || sampleAlmanac)).toBe(46);
   });
 });
 
@@ -77,3 +68,5 @@ temperature-to-humidity map:
 humidity-to-location map:
 60 56 37
 56 93 4`;
+
+const puzzleInput = ``;

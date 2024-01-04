@@ -7,7 +7,6 @@ import {
   stepsRequired,
   stepsRequired2,
 } from "./day08.ts";
-import { input08 } from "./input08.ts";
 
 describe("day 8 part 1", () => {
   it("parses nodes", () => {
@@ -28,21 +27,18 @@ describe("day 8 part 1", () => {
   it("solves the second example", () => {
     expect(stepsRequired(sampleInput2)).toBe(6);
   });
-  it.skip("solves the puzzle", () => {
-    expect(stepsRequired(input08)).toBe(0);
+  it("solves the puzzle", () => {
+    expect(stepsRequired(puzzleInput || sampleInput)).toBe(2);
   });
 });
 
 describe("day 8 part 2", () => {
-  it("solves the example", () => {
-    expect(stepsRequired2(sampleInput3)).toBe(6);
-  });
   // naive solution too slow
-  it.skip("solves the puzzle", () => {
-    expect(stepsRequired2(input08)).toBe(12169);
+  it.skip("solves the puzzle naively", () => {
+    expect(stepsRequired2(puzzleInput || sampleInput3)).toBe(6);
   });
-  it.skip("solves the puzzle intelligently", () => {
-    expect(analyze(input08)).toEqual(0);
+  it("solves the puzzle intelligently", () => {
+    expect(analyze(puzzleInput || sampleInput3)).toEqual(6);
   });
 });
 
@@ -72,3 +68,5 @@ JJB = (JJC, JJC)
 JJC = (JJZ, JJZ)
 JJZ = (JJB, JJB)
 XXX = (XXX, XXX)`;
+
+const puzzleInput = ``;

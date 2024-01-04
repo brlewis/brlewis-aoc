@@ -1,4 +1,3 @@
-import { puzzleInput } from "./input03.ts";
 import {
   adjacentSet,
   adjacentSum,
@@ -31,12 +30,8 @@ describe("day3 part1", () => {
     expect(adjacentSet(sampleSchematic).size).toEqual(8);
   });
 
-  it("solves the example", () => {
-    expect(adjacentSum(sampleSchematic)).toBe(4361);
-  });
-
-  it.skip("solves the puzzle", () => {
-    expect(adjacentSum(puzzleInput)).toBe(0);
+  it("solves the puzzle", () => {
+    expect(adjacentSum(puzzleInput || sampleSchematic)).toBe(4361);
   });
 });
 
@@ -45,12 +40,8 @@ describe("day3 part2", () => {
     expect(gearNumbers(sampleSchematic)).toEqual([[467, 35], [755, 598]]);
   });
 
-  it("solves the example", () => {
-    expect(gearSum(sampleSchematic)).toBe(467835);
-  });
-
-  it.skip("solves the puzzle", () => {
-    expect(gearSum(puzzleInput)).toBe(0);
+  it("solves the puzzle", () => {
+    expect(gearSum(puzzleInput || sampleSchematic)).toBe(467835);
   });
 });
 
@@ -64,3 +55,5 @@ const sampleSchematic = `467..114..
 ......755.
 ...$.*....
 .664.598..`;
+
+const puzzleInput = ``;
