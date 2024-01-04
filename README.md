@@ -28,5 +28,5 @@ If you'd like to use AoC and this repo as a learning tool, here are the steps:
 3. In a terminal, run `deno test --watch`
 4. Remove the bodies of my functions and see if you can recreate them yourself
    in a way that keeps the tests passing.
-5. Replace my input file with your input, then enter the "actual" result from
-   the failing test as your answer on AoC.
+5. Replace the input file with your input, unskip the test if it's skipped, then
+   enter the "actual" result from the failing test as your answer on AoC.

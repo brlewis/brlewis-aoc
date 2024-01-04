@@ -28,8 +28,8 @@ describe("day 8 part 1", () => {
   it("solves the second example", () => {
     expect(stepsRequired(sampleInput2)).toBe(6);
   });
-  it("solves the puzzle", () => {
-    expect(stepsRequired(input08)).toBe(12169);
+  it.skip("solves the puzzle", () => {
+    expect(stepsRequired(input08)).toBe(0);
   });
 });
 
@@ -41,8 +41,8 @@ describe("day 8 part 2", () => {
   it.skip("solves the puzzle", () => {
     expect(stepsRequired2(input08)).toBe(12169);
   });
-  it("solves the puzzle intelligently", () => {
-    expect(analyze(input08)).toEqual(12030780859469);
+  it.skip("solves the puzzle intelligently", () => {
+    expect(analyze(input08)).toEqual(0);
   });
 });
 

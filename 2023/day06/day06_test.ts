@@ -7,8 +7,8 @@ describe("day 6 part 1", () => {
     expect(part1(sampleInput)).toBe(288);
   });
 
-  it("solves the puzzle", () => {
-    expect(part1(puzzleInput)).toBe(6209190);
+  it.skip("solves the puzzle", () => {
+    expect(part1(puzzleInput)).toBe(0);
   });
 });
 
@@ -17,13 +17,12 @@ describe("day 6 part 2", () => {
     expect(part2(sampleInput)).toBe(71503);
   });
 
-  it("solves the puzzle", () => {
-    expect(part2(puzzleInput)).toBe(28545089);
+  it.skip("solves the puzzle", () => {
+    expect(part2(puzzleInput)).toBe(0);
   });
 });
 
 const sampleInput = `Time:      7  15   30
 Distance:  9  40  200`;
 
-const puzzleInput = `Time:        40     92     97     90
-Distance:   215   1064   1505   1100`;
+const puzzleInput = `Do not check in your actual input`;

@@ -18,8 +18,8 @@ describe("day2 part1", () => {
     expect(gameValue({ red: 4, green: 14, blue: 17 }, game2)).toBe(0);
   });
 
-  it("solves the puzzle", () => {
-    expect(part1(part1Bag, puzzleInput)).toBe(2237);
+  it.skip("solves the puzzle", () => {
+    expect(part1(part1Bag, puzzleInput)).toBe(0);
   });
 });
 
@@ -33,8 +33,8 @@ describe("day2 part2", () => {
     expect(part2(sampleInput)).toBe(2286);
   });
 
-  it("solves the puzzle", () => {
-    expect(part2(puzzleInput)).toBe(66681);
+  it.skip("solves the puzzle", () => {
+    expect(part2(puzzleInput)).toBe(0);
   });
 });
 
