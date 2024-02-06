@@ -94,3 +94,6 @@ export class Grid {
     }
   }
 }
+
+// TODO: For part 2, construct a grid with coordinates halfway between
+// the main grid coordinates.  Path-find from the outside.
