@@ -19,6 +19,14 @@ describe("2023 day 11 part 1", () => {
   });
 });
 
+describe("2023 day 11 part 2", () => {
+  it("solves the puzzle", () => {
+    const cosmos = new Cosmos(puzzleInput || sampleInput);
+    expect(cosmos.distanceTotal(puzzleInput ? 1_000_000 : 10)).toBe(1030);
+    expect(cosmos.distanceTotal(100)).toBe(8410);
+  });
+});
+
 const sampleInput = `...#......
 .......#..
 #.........
