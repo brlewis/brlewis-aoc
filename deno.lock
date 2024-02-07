@@ -2,6 +2,7 @@
   "version": "3",
   "packages": {
     "specifiers": {
+      "npm:core-js-pure": "npm:core-js-pure@3.35.1",
       "npm:mathjs": "npm:mathjs@12.2.1"
     },
     "npm": {
@@ -13,6 +14,10 @@
       },
       "complex.js@2.1.1": {
         "integrity": "sha512-8njCHOTtFFLtegk6zQo0kkVX1rngygb/KQI6z1qZxlFI3scluC+LVTCFbrkWjBv4vvLlbQ9t88IPMC6k95VTTg==",
+        "dependencies": {}
+      },
+      "core-js-pure@3.35.1": {
+        "integrity": "sha512-zcIdi/CL3MWbBJYo5YCeVAAx+Sy9yJE9I3/u9LkFABwbeaPhTMRWraM8mYFp9jW5Z50hOy7FVzCc8dCrpZqtIQ==",
         "dependencies": {}
       },
       "decimal.js@10.4.3": {

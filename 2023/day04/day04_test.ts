@@ -10,12 +10,13 @@ import {
 
 describe("day3 part1", () => {
   it("parses", () => {
-    expect(parseCard("Card 1: 41 48 83 86 17 | 83 86  6 31 17  9 48 53"))
-      .toEqual({
-        winning: [41, 48, 83, 86, 17],
-        mine: [83, 86, 6, 31, 17, 9, 48, 53],
-        copies: 1,
-      });
+    const card = parseCard("Card 1: 41 48 83 86 17 | 83 86  6 31 17  9 48 53");
+    expect(Array.from(card.winning)).toEqual(
+      [41, 48, 83, 86, 17],
+    );
+    expect(Array.from(card.mine)).toEqual(
+      [83, 86, 6, 31, 17, 9, 48, 53],
+    );
   });
 
   it("finds matches", () => {

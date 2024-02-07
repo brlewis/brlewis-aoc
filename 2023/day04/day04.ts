@@ -1,6 +1,8 @@
+import Set from "npm:core-js-pure/actual/set/index.js";
+
 export type Card = {
-  winning: number[];
-  mine: number[];
+  winning: Set<number>; // TODO: use Set for winning and mine
+  mine: Set<number>;
   copies: number;
 };
 
@@ -8,18 +10,15 @@ export function parseCard(str: string): Card {
   const cardSets = str.split(":")[1].split("|").map((s) =>
     s.split(" ").map((x) => parseInt(x)).filter((n) => !isNaN(n))
   );
-  return { winning: cardSets[0], mine: cardSets[1], copies: 1 };
+  return {
+    winning: new Set(cardSets[0]),
+    mine: new Set(cardSets[1]),
+    copies: 1,
+  };
 }
 
 export function matches(card: Card): Set<number> {
-  const matchSet: Set<number> = new Set();
-  const winners: Set<number> = new Set(card.winning);
-  card.mine.forEach((n) => {
-    if (winners.has(n)) {
-      matchSet.add(n);
-    }
-  });
-  return matchSet;
+  return card.mine.intersection(card.winning);
 }
 
 export function cardWorth(card: Card): number {
