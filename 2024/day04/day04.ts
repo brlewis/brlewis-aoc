@@ -41,11 +41,6 @@ export const aoc24_04_1 = (haystack: string, needle: string) => {
 
 export const aoc24_04_2 = (haystack: string) => {
   const width = haystack.indexOf("\n");
-  const height = haystack.length / (width + 1);
-  const inside = (
-    x: number,
-    y: number,
-  ) => (0 <= x && x < width && 0 <= y && y < height);
   const getPattern = (start: number) =>
     haystack[start] + haystack[start + 2] + haystack[start + (width + 1) + 1] +
     haystack[start + 2 * (width + 1)] + haystack[start + 2 * (width + 1) + 2];
