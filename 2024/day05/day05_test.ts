@@ -2,7 +2,7 @@ import { describe, it } from "bdd";
 import { expect } from "expect";
 import { aoc24_05 } from "./day05.ts";
 
-describe("2024 day4 parts 1 and 2", () => {
+describe("2024 day5 parts 1 and 2", () => {
   it("solves the puzzle", () => {
     expect(aoc24_05(puzzleInput || sampleInput)).toEqual([143, 123]);
   });
