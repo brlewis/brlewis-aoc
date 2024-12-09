@@ -28,7 +28,7 @@ export class Hand {
     if (wildCount && this.counts.length > 1) {
       this.counts.splice(this.counts.indexOf(wildCount), 1);
       this.counts[this.counts.length - 1] += wildCount;
-      let htype = this.handType();
+      const htype = this.handType();
       console.log({ cards, htype });
     }
   }
