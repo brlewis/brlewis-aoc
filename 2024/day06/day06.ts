@@ -10,12 +10,12 @@ export const helper = (grid: Grid, obstacle?: number) => {
     direction = (direction + 1) % 4;
     [dx, dy] = directions[direction];
   };
-  let start = grid.contents.indexOf("^"); // assumes north-facing start
+  const start = grid.contents.indexOf("^"); // assumes north-facing start
   let [x, y] = [grid.x(start), grid.y(start)];
   while (grid.inside(x, y)) {
     const pos = grid.index(x, y);
     if (positions.has(pos)) {
-      let dirs = seen.get(pos) ?? new Set<number>();
+      const dirs = seen.get(pos) ?? new Set<number>();
       if (dirs.has(direction)) {
         return { positions, loop: true };
       }

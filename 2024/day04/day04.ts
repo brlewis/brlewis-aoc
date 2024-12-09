@@ -46,7 +46,7 @@ export const aoc24_04_2 = (haystack: string) => {
     haystack[start + 2 * (width + 1)] + haystack[start + 2 * (width + 1) + 2];
   let count = 0;
   for (let i = 0; i < haystack.length; i++) {
-    let pattern = getPattern(i);
+    const pattern = getPattern(i);
     if (["MSAMS", "MMASS", "SMASM", "SSAMM"].includes(pattern)) {
       count++;
     }

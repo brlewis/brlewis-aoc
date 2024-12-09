@@ -13,7 +13,7 @@ export const safe = (line: string) => {
 };
 
 export const part1 = (input: string, predicate: typeof safe) => {
-  let lines = input.split("\n");
+  const lines = input.split("\n");
   let count = 0;
   for (let i = 0; i < lines.length; i++) {
     if (predicate(lines[i])) {
