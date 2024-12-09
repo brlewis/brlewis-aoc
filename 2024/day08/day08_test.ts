@@ -8,6 +8,12 @@ describe("2024 day8 part 1", () => {
   });
 });
 
+describe("2024 day8 part 2", () => {
+  it("solves the puzzle", () => {
+    expect(aoc_24_08(puzzleInput || sampleInput, 2).size).toEqual(34);
+  });
+});
+
 const sampleInput = `............
 ........0...
 .....0......
