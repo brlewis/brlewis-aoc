@@ -15,6 +15,9 @@ export class Grid {
   get(x: number, y: number) {
     return this.contents[this.index(x, y)];
   }
+  getNum(x: number, y: number) {
+    return parseInt(this.get(x, y));
+  }
   x(index: number) {
     return index % (this.width + 1);
   }
