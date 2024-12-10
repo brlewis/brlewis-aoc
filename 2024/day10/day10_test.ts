@@ -1,20 +1,18 @@
 import { describe, it } from "bdd";
 import { expect } from "expect";
-import { aoc_24_10_1, aoc_24_10_2 } from "./day10.ts";
+import { ac_24_10 } from "./day10.ts";
 
-describe("2024 day9 part 1", () => {
+describe("2024 day10 part 1", () => {
   it("solves the puzzle", () => {
-    expect(aoc_24_10_1(puzzleInput || sampleInput)).toEqual(36);
+    expect(ac_24_10(puzzleInput || sampleInput)[1]).toEqual(36);
   });
 });
 
-/*
-describe("2024 day9 part 2", () => {
+describe("2024 day10 part 2", () => {
   it("solves the puzzle", () => {
-    expect(aoc_24_10_2(puzzleInput || sampleInput)).toEqual(81);
+    expect(ac_24_10(puzzleInput || sampleInput)[2]).toEqual(81);
   });
 });
- */
 
 const sampleInput = `89010123
 78121874
