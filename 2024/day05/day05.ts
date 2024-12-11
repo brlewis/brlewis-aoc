@@ -6,12 +6,13 @@ type Rules = Map<number, LaterPages>;
 export const aoc24_05 = (input: string) => {
   const [rulesStr, updatesStr] = input.split("\n\n");
   const updates = updatesStr.split("\n").map((line) => ints(line, ","));
-  const rules: Rules = new Map();
-  rulesStr.split("\n").map((line) => ints(line, "|")).forEach(([a, b]) => {
-    const laterPages: LaterPages = rules.get(a) ?? new Set();
-    laterPages.add(b);
-    rules.set(a, laterPages);
-  });
+  const rulePairs = rulesStr.split("\n").map((line) => ints(line, "|"));
+  const ruleArrays = Map.groupBy(rulePairs, ([a, b]) => a);
+  const rules = new Map(
+    ruleArrays.entries().map((
+      [a, arr],
+    ) => [a, new Set(arr.map(([a, b]) => b))]),
+  );
 
   let sum1 = 0, sum2 = 0;
   const correctOrder = (update: number[]) => {
