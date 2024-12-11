@@ -4,6 +4,9 @@ export const blink = (arr: number[][]) => {
   const newArr = [];
   for (let i = 0; i < arr.length; i++) {
     let [count, num] = arr[i];
+    if (count === 0) {
+      continue;
+    }
     if (num === 0) {
       newArr.push([count, 1]);
       continue;
@@ -20,14 +23,16 @@ export const blink = (arr: number[][]) => {
     }
   }
   newArr.sort((a, b) => a[1] - b[1]);
-  let i = 0;
+  let i = 0, j = i + 1;
   while (i < newArr.length - 1) {
-    const [_count, num] = newArr[i], [count1, num1] = newArr[i + 1];
+    const [_count, num] = newArr[i], [count1, num1] = newArr[j];
     if (num1 === num) {
       newArr[i][0] += count1;
-      newArr.splice(i + 1, 1);
+      newArr[j][0] = 0;
+      j++;
     } else {
-      i++;
+      i = j;
+      j = i + 1;
     }
   }
   return newArr;
