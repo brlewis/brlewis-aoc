@@ -66,7 +66,14 @@ I almost wasn't going to do any Advent of Code in 2024, but I was enticed to
 might have broken, since my 2023 code was all for Deno 1 and now Deno 2 is out.
 Happily, everything worked with _no_ changes. All that really needs updating is
 this README. I can no longer say that `Set` doesn't implement the `intersection`
-method.
+method. All the
+[set composition](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Set#set_composition)
+methods are built in.
+
+EDIT: After day 10 I learned about
+[Map.groupBy](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Map/groupBy)
+which also looks super useful for AoC. I might rewrite some earlier code to use
+it.
 
 ## 2023 notes
 
