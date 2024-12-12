@@ -7,11 +7,11 @@ export const aoc24_05 = (input: string) => {
   const [rulesStr, updatesStr] = input.split("\n\n");
   const updates = updatesStr.split("\n").map((line) => ints(line, ","));
   const rulePairs = rulesStr.split("\n").map((line) => ints(line, "|"));
-  const ruleArrays = Map.groupBy(rulePairs, ([a, b]) => a);
+  const ruleArrays = Map.groupBy(rulePairs, ([a, _b]) => a);
   const rules = new Map(
     ruleArrays.entries().map((
       [a, arr],
-    ) => [a, new Set(arr.map(([a, b]) => b))]),
+    ) => [a, new Set(arr.map(([_a, b]) => b))]),
   );
 
   let sum1 = 0, sum2 = 0;

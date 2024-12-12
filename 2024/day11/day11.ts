@@ -3,7 +3,7 @@ import { ints } from "../../util.ts";
 export const blink = (arr: number[][]) => {
   const newArr = [];
   for (let i = 0; i < arr.length; i++) {
-    let [count, num] = arr[i];
+    const [count, num] = arr[i];
     if (count === 0) {
       continue;
     }
