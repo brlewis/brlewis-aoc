@@ -8,9 +8,9 @@ describe("2024 day12 part 1", () => {
   });
 });
 
-describe.skip("2024 day12 part 2", () => {
+describe("2024 day12 part 2", () => {
   it("solves the puzzle", () => {
-    expect(aoc24_12(puzzleInput || sampleInput, 2)).toEqual(2);
+    expect(aoc24_12(puzzleInput || sampleInput, 2)).toEqual(1206);
   });
 });
 
