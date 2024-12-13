@@ -2,6 +2,10 @@ export function ints(str: string, separator = " "): number[] {
   return str.split(separator).map((x) => parseInt(x)).filter((n) => !isNaN(n));
 }
 
+export function bigints(str: string) {
+  return str.match(/[0-9]+/g)!.map((x) => BigInt(x));
+}
+
 export class Grid {
   contents: string;
   width: number;
