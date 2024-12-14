@@ -1,10 +1,17 @@
 import { describe, it } from "bdd";
 import { expect } from "expect";
-import { aoc24_14 } from "./day14.ts";
+import { aoc24_14_1 } from "./day14.ts";
+import { aoc24_14_2 } from "./day14.ts";
 
 describe("2024 day14 part 1", () => {
   it("solves the puzzle", () => {
-    expect(aoc24_14(puzzleInput || sampleInput, 100)).toEqual(12);
+    expect(aoc24_14_1(puzzleInput || sampleInput, 100)).toEqual(12);
+  });
+});
+
+describe("2024 day14 part 1", () => {
+  it("solves the puzzle", () => {
+    expect(aoc24_14_2(puzzleInput || sampleInput)).toEqual(77);
   });
 });
 
