@@ -14,6 +14,10 @@ Two equations with 2 unknowns. "Least number of tokens" mostly red herring.
      94 + (-22/67) * 34
 
    a = (prizeX + (-bX/bY) * prizeY) / (aX + (-bX/bY) * aY)
+
+   Part 2 requires bigint. Multiply top/bottom by bY to avoid fractions.
+   
+   (bY * prizeX - bX * prizeY) / (bY * aX - bX * aY)
 ```
 
 Solution a = 80, b = 40.
