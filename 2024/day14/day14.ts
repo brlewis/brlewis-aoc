@@ -58,13 +58,23 @@ export const aoc24_14_2 = (
   );
 
   for (let seconds = 1; true; seconds++) {
+    const positions = new Array<{ x: number; y: number }>();
     for (let i = 0; i < starts.length; i++) {
       const [px, py, vx, vy] = starts[i]!;
       const x = (px + seconds * (vx + width)) % width;
       const y = (py + seconds * (vy + height)) % height;
+      positions.push({ x, y });
       quadrants[quadrant(x, y, midx, midy)]++;
     }
-    if (quadrants[1] === quadrants[2] && quadrants[3] === quadrants[4]) {
+    const topDown = Map.groupBy(positions, ({ x, y }) => y);
+    let isOrdered = true;
+    for (let y = 0; y < midy; y++) {
+      if ((topDown.get(y)?.length ?? 0) > (topDown.get(y + 1)?.length ?? 0)) {
+        isOrdered = false;
+        break;
+      }
+    }
+    if (isOrdered) {
       return seconds;
     }
   }
