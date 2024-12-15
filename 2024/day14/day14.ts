@@ -40,9 +40,11 @@ export const aoc24_14_1 = (
   return quadrants[1] * quadrants[2] * quadrants[3] * quadrants[4];
 };
 
-export const aoc24_14_2 = (
-  input: string,
-) => {
+/**
+ * Change puzzleInput in the test file as usual and run `deno part2.ts`
+ * to manually find the answer to part 2.
+ */
+export const aoc24_14_2 = (input: string) => {
   let width = 101, height = 103;
   if (input.length < 200) {
     width = 11;
@@ -63,17 +65,25 @@ export const aoc24_14_2 = (
       const y = (py + seconds * (vy + height)) % height;
       positions.add([x, y].join());
     }
+    let maxAdj = 0;
     for (let y = 0; y < height; y++) {
       const line = [];
+      let adjacentCount = 0;
       for (let x = 0; x < width; x++) {
         if (positions.has([x, y].join())) {
           line.push("1");
+          adjacentCount++;
+          maxAdj = Math.max(maxAdj, adjacentCount);
         } else {
           line.push(".");
+          adjacentCount = 0;
         }
       }
       console.log(line.join(""));
     }
-    keepGoing = confirm(`Keep going after second ${seconds}?`);
+    console.log({ seconds });
+    if (maxAdj >= 7) {
+      keepGoing = confirm(`Keep going?`);
+    }
   }
 };
