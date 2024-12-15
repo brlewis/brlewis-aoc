@@ -48,34 +48,32 @@ export const aoc24_14_2 = (
     width = 11;
     height = 7;
   }
-  const midx = (width - 1) / 2;
-  const midy = (height - 1) / 2;
-  const quadrants = [0, 0, 0, 0, 0];
   const starts = input.split("\n").map((line) =>
     line.match(/[0-9-]+/g)!.map(
       (n) => parseInt(n),
     )
   );
 
-  for (let seconds = 1; true; seconds++) {
-    const positions = new Array<{ x: number; y: number }>();
+  let keepGoing = true;
+  for (let seconds = 1; keepGoing; seconds++) {
+    const positions = new Set<string>();
     for (let i = 0; i < starts.length; i++) {
       const [px, py, vx, vy] = starts[i]!;
       const x = (px + seconds * (vx + width)) % width;
       const y = (py + seconds * (vy + height)) % height;
-      positions.push({ x, y });
-      quadrants[quadrant(x, y, midx, midy)]++;
+      positions.add([x, y].join());
     }
-    const topDown = Map.groupBy(positions, ({ x, y }) => y);
-    let isOrdered = true;
-    for (let y = 0; y < midy; y++) {
-      if ((topDown.get(y)?.length ?? 0) > (topDown.get(y + 1)?.length ?? 0)) {
-        isOrdered = false;
-        break;
+    for (let y = 0; y < height; y++) {
+      const line = [];
+      for (let x = 0; x < width; x++) {
+        if (positions.has([x, y].join())) {
+          line.push("1");
+        } else {
+          line.push(".");
+        }
       }
+      console.log(line.join(""));
     }
-    if (isOrdered) {
-      return seconds;
-    }
+    keepGoing = confirm(`Keep going after second ${seconds}?`);
   }
 };
