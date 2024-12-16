@@ -35,7 +35,8 @@ export class Grid {
       this.width = contents.length;
       this.height = 1;
     } else {
-      this.height = contents.length / (this.width + 1);
+      // Round so as not to be sensitive to trailing newlines
+      this.height = Math.round(contents.length / (this.width + 1));
     }
   }
 }
