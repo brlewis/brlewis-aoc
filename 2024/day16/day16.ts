@@ -9,67 +9,61 @@ type Exploration = {
 };
 export const aoc24_16 = (input: string, part = 1) => {
   const maze = new Grid(input);
+  let maxLength = 100;
   const start = input.indexOf("S");
-  let found = false;
-  let best = Infinity;
-  const explorations = new Set<Exploration>([{
-    x: maze.x(start),
-    y: maze.y(start),
-    dir: 1, // east
-    score: 0,
-    seen: new Set(),
-  }]);
-  while (!found || explorations.size > 1) {
-    for (const e of explorations) {
-      explorations.delete(e);
-      if (maze.get(e.x, e.y) === "E") {
-        found = true;
-        best = Math.min(e.score, best);
-        if (maze.width < 15) {
-          console.log(`Score: ${e.score} vs ${best}`);
-          logPath(maze, e.seen);
-        }
-        continue;
-      }
-      if (e.score > best) {
-        explorations.delete(e);
-        continue;
-      }
-      const straight = dirs4[e.dir];
-      const left = dirs4[(e.dir + 3) % 4];
-      const right = dirs4[(e.dir + 1) % 4];
-      function maybeAdd(ex: Exploration) {
-        if (
-          maze.get(ex.x, ex.y) !== "#" && !ex.seen.has(maze.index(ex.x, ex.y))
-        ) {
-          explorations.add(ex);
-          ex.seen = ex.seen.union(new Set([maze.index(ex.x, ex.y)]));
-        }
-      }
-      maybeAdd({
-        x: e.x + straight.dx,
-        y: e.y + straight.dy,
-        dir: e.dir,
-        score: e.score + 1,
-        seen: e.seen,
-      });
-      maybeAdd({
-        x: e.x + left.dx,
-        y: e.y + left.dy,
-        dir: (e.dir + 3) % 4,
-        score: e.score + 1001,
-        seen: e.seen,
-      });
-      maybeAdd({
-        x: e.x + right.dx,
-        y: e.y + right.dy,
-        dir: (e.dir + 1) % 4,
-        score: e.score + 1001,
-        seen: e.seen,
-      });
+  const bestScores = new Map<number, number>();
+  function findBest(
+    best: number,
+    score: number,
+    x: number,
+    y: number,
+    dir: number,
+    seen: Set<number>,
+  ) {
+    if (score >= best) {
+      return score;
     }
+    if (maze.get(x, y) === "#") {
+      return Infinity;
+    }
+    if (maze.get(x, y) === "E") {
+      if (maze.width === 20) {
+        console.log(`Score: ${score} vs ${best}`);
+        logPath(maze, seen);
+      }
+      return score;
+    }
+    const here = maze.index(x, y);
+    const bestHere = bestScores.get(here);
+    if (score >= (bestHere ?? Infinity)) {
+      // No point searching again.
+      return Infinity;
+    }
+    bestScores.set(here, score);
+
+    if (seen.has(here)) {
+      return Infinity;
+    }
+    seen = seen.union(new Set([here]));
+    if (seen.size > maxLength) {
+      maxLength = seen.size;
+    }
+    for (let d of [dir, (dir + 3) % 4, (dir + 1) % 4]) {
+      best = Math.min(
+        best,
+        findBest(
+          best,
+          score + (d === dir ? 1 : 1001),
+          x + dirs4[d].dx,
+          y + dirs4[d].dy,
+          d,
+          seen,
+        ),
+      );
+    }
+    return best;
   }
-  return best;
+  return findBest(Infinity, 0, maze.x(start), maze.y(start), 1, new Set());
 };
 
 function logPath(
