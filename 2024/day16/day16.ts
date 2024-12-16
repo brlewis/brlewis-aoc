@@ -34,12 +34,13 @@ export const aoc24_16 = (input: string, part = 1) => {
       return score;
     }
     const here = maze.index(x, y);
-    const bestHere = bestScores.get(here);
+    const position = 100_000_000 * dir + here;
+    const bestHere = bestScores.get(position);
     if (score >= (bestHere ?? Infinity)) {
       // No point searching again.
       return Infinity;
     }
-    bestScores.set(here, score);
+    bestScores.set(position, score);
 
     if (seen.has(here)) {
       return Infinity;
