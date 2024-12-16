@@ -7,11 +7,16 @@ type Exploration = {
   score: number;
   seen: Set<number>;
 };
-export const aoc24_16 = (input: string, part = 1) => {
+export const aoc24_16 = (input: string, part = 1, log = false) => {
+  // For part 1 we can ignore equally good paths, which halves solving time.
+  const tooHigh = part === 1
+    ? (a: number, b: number) => a >= b
+    : (a: number, b: number) => a > b;
   const maze = new Grid(input);
   let maxLength = 100;
   const start = input.indexOf("S");
-  const bestScores = new Map<number, number>();
+  const bestScores = new Map<number, number>(); // cache per position
+  let seats = new Set<number>();
   function findBest(
     best: number,
     score: number,
@@ -20,14 +25,24 @@ export const aoc24_16 = (input: string, part = 1) => {
     dir: number,
     seen: Set<number>,
   ) {
-    if (score >= best) {
+    if (tooHigh(score, best)) {
       return score;
     }
     if (maze.get(x, y) === "#") {
       return Infinity;
     }
     if (maze.get(x, y) === "E") {
-      if (maze.width === 20) {
+      if (part === 2) {
+        if (log) {
+          console.log({ score, size: seen.size });
+        }
+        if (score < best) {
+          seats = seen;
+        } else {
+          seats = seats.union(seen);
+        }
+      }
+      if (log) {
         console.log(`Score: ${score} vs ${best}`);
         logPath(maze, seen);
       }
@@ -36,7 +51,7 @@ export const aoc24_16 = (input: string, part = 1) => {
     const here = maze.index(x, y);
     const position = 100_000_000 * dir + here;
     const bestHere = bestScores.get(position);
-    if (score >= (bestHere ?? Infinity)) {
+    if (tooHigh(score, bestHere ?? Infinity)) {
       // No point searching again.
       return Infinity;
     }
@@ -64,7 +79,18 @@ export const aoc24_16 = (input: string, part = 1) => {
     }
     return best;
   }
-  return findBest(Infinity, 0, maze.x(start), maze.y(start), 1, new Set());
+  const best = findBest(
+    Infinity,
+    0,
+    maze.x(start),
+    maze.y(start),
+    1,
+    new Set(),
+  );
+  if (part === 2 && log) {
+    logPath(maze, seats);
+  }
+  return (part === 1 ? best : 1 + seats.size);
 };
 
 function logPath(
