@@ -1,6 +1,6 @@
 import { Grid } from "../../util.ts";
 
-export const aoc24_15 = (input: string, part = 1) => {
+export const aoc24_15 = (input: string) => {
   let sum = 0;
   const [gridStr, moveLines] = input.split("\n\n");
   const start = new Grid(gridStr);
@@ -73,6 +73,43 @@ export const aoc24_15 = (input: string, part = 1) => {
   }
   /** only called when pushing [ or ] */
   function moveRobot2({ dx, dy }: { dx: number; dy: number }) {
+    function tryPush(y: number, row: Set<number>) {
+      const nextRow = new Set<number>();
+      let stillPushing = false;
+      for (const x of row) {
+        const obstacle = warehouse.get(start.index(x, y + dy));
+        if (!obstacle) {
+          continue;
+        }
+        if (obstacle === "#") {
+          return false;
+        }
+        stillPushing = true;
+        if (obstacle === "[") {
+          nextRow.add(x);
+          nextRow.add(x + 1);
+        } else if (obstacle === "]") {
+          nextRow.add(x);
+          nextRow.add(x - 1);
+        } else {
+          throw new Error(
+            `Unexpected obstacle ${obstacle} at (${x},${y + dy})`,
+          );
+        }
+      }
+      if (!stillPushing || tryPush(y + dy, nextRow)) {
+        for (const x of row) {
+          warehouse.set(
+            start.index(x, y + dy),
+            warehouse.get(start.index(x, y))!,
+          );
+          warehouse.delete(start.index(x, y));
+        }
+        return true;
+      }
+      return false;
+    } // end function tryPush
+
     if (dy === 0) {
       // simple horizontal push
       for (
@@ -105,42 +142,6 @@ export const aoc24_15 = (input: string, part = 1) => {
       }
     } else {
       // vertical push
-      function tryPush(y: number, row: Set<number>) {
-        const nextRow = new Set<number>();
-        let stillPushing = false;
-        for (const x of row) {
-          const obstacle = warehouse.get(start.index(x, y + dy));
-          if (!obstacle) {
-            continue;
-          }
-          if (obstacle === "#") {
-            return false;
-          }
-          stillPushing = true;
-          if (obstacle === "[") {
-            nextRow.add(x);
-            nextRow.add(x + 1);
-          } else if (obstacle === "]") {
-            nextRow.add(x);
-            nextRow.add(x - 1);
-          } else {
-            throw new Error(
-              `Unexpected obstacle ${obstacle} at (${x},${y + dy})`,
-            );
-          }
-        }
-        if (!stillPushing || tryPush(y + dy, nextRow)) {
-          for (const x of row) {
-            warehouse.set(
-              start.index(x, y + dy),
-              warehouse.get(start.index(x, y))!,
-            );
-            warehouse.delete(start.index(x, y));
-          }
-          return true;
-        }
-        return false;
-      }
       const row = new Set([robot.x]);
       if (warehouse.get(start.index(robot.x, robot.y + dy)) === "[") {
         row.add(robot.x + 1);

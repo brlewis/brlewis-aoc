@@ -1,12 +1,5 @@
 import { dirs4, Grid } from "../../util.ts";
 
-type Exploration = {
-  x: number;
-  y: number;
-  dir: number;
-  score: number;
-  seen: Set<number>;
-};
 export const aoc24_16 = (input: string, part = 1, log = false) => {
   // For part 1 we can ignore equally good paths, which halves solving time.
   const tooHigh = part === 1
@@ -64,7 +57,7 @@ export const aoc24_16 = (input: string, part = 1, log = false) => {
     if (seen.size > maxLength) {
       maxLength = seen.size;
     }
-    for (let d of [dir, (dir + 3) % 4, (dir + 1) % 4]) {
+    for (const d of [dir, (dir + 3) % 4, (dir + 1) % 4]) {
       best = Math.min(
         best,
         findBest(

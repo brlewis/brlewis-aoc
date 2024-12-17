@@ -1,7 +1,6 @@
 import { describe, it } from "bdd";
 import { expect } from "expect";
 import { aoc24_14_1 } from "./day14.ts";
-import { aoc24_14_2 } from "./day14.ts";
 
 describe("2024 day14 part 1", () => {
   it("solves the puzzle", () => {
