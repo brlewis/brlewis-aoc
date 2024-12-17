@@ -1,10 +1,13 @@
 import { bigints } from "../../util.ts";
 
-export class aoc24_17 {
+export class AoC24_17 {
   A = 0n;
   B = 0n;
   C = 0n;
   P = 0n;
+  origA = 0n;
+  origB = 0n;
+  origC = 0n;
   program: bigint[] = [];
   output: bigint[] = [];
 
@@ -22,13 +25,18 @@ export class aoc24_17 {
   }
   constructor(input: string) {
     const [registers, bytes] = input.split("\n\n");
-    [this.A, this.B, this.C] = registers.split("\n").map((line) =>
+    [this.origA, this.origB, this.origC] = registers.split("\n").map((line) =>
       bigints(line)[0]
     );
+    this.reset();
     this.program = bigints(bytes);
+  }
+  reset() {
+    [this.A, this.B, this.C] = [this.origA, this.origB, this.origC];
   }
   exec(quinesOnly = false) {
     this.P = 0n;
+    this.output = [];
     while (this.P < this.program.length) {
       const operand = this.program[Number(this.P + 1n)];
       switch (this.program[Number(this.P)]) {
@@ -70,17 +78,26 @@ export class aoc24_17 {
     return this.output.join(",").replace("n", "");
   }
   findQuine() {
-    const b = this.B, c = this.C;
-    for (let a = 0n; true; a++) {
+    return this.findQ(0n, 0);
+  }
+  findQ(leadingBits: bigint, digitCount: number): bigint | undefined {
+    if (digitCount === this.program.length) {
+      return leadingBits;
+    }
+    for (let i = 0n; i < 8n; i++) {
+      const a = leadingBits << 3n | i;
+      this.reset();
       this.A = a;
-      this.B = b;
-      this.C = c;
-      if (a % 10_000_000n === 0n) {
-        console.log(this.A);
+      this.exec();
+      if (
+        this.output[0] !==
+          this.program[this.program.length - 1 - digitCount]
+      ) {
+        continue;
       }
-      this.output = [];
-      if (this.exec(true) && this.output.length === this.program.length) {
-        return a;
+      const a2 = this.findQ(a, digitCount + 1);
+      if (a2 !== undefined) {
+        return a2;
       }
     }
   }
