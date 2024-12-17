@@ -29,8 +29,16 @@ describe("2024 day17 part 1", () => {
   });
 });
 
-describe.skip("2024 day17 part 2", () => {
+describe("2024 day17 part 2", () => {
+  it("executes correctly", () => {
+    const cpu = new aoc24_17(sampleInput2);
+    cpu.A = 117440;
+    cpu.exec();
+    expect(cpu.output).toEqual(cpu.program);
+  });
   it("solves the puzzle", () => {
+    const cpu = new aoc24_17(puzzleInput || sampleInput2);
+    expect(cpu.findQuine()).toEqual(117440);
   });
 });
 
@@ -39,5 +47,11 @@ Register B: 0
 Register C: 0
 
 Program: 0,1,5,4,3,0`;
+
+const sampleInput2 = `Register A: 2024
+Register B: 0
+Register C: 0
+
+Program: 0,3,5,4,3,0`;
 
 const puzzleInput = ``;

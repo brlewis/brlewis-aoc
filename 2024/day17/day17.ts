@@ -27,7 +27,8 @@ export class aoc24_17 {
     );
     this.program = anyints(bytes);
   }
-  exec() {
+  exec(quinesOnly = false) {
+    this.P = 0;
     while (this.P < this.program.length) {
       const operand = this.program[this.P + 1];
       switch (this.program[this.P]) {
@@ -49,9 +50,14 @@ export class aoc24_17 {
         case 4: // bxc
           this.B ^= this.C;
           break;
-        case 5: // out
-          this.output.push(this.combo(operand) & 7);
+        case 5: { // out
+          const result = this.combo(operand) & 7;
+          if (quinesOnly && result !== this.program[this.output.length]) {
+            return "";
+          }
+          this.output.push(result);
           break;
+        }
         case 6: // bdv
           this.B = this.A >> this.combo(operand);
           break;
@@ -62,5 +68,20 @@ export class aoc24_17 {
       this.P += 2;
     }
     return this.output.join(",");
+  }
+  findQuine() {
+    const b = this.B, c = this.C;
+    for (let a = 0; true; a++) {
+      this.A = a;
+      this.B = b;
+      this.C = c;
+      if (a % 10_000_000 === 0) {
+        console.log(this.A);
+      }
+      this.output = [];
+      if (this.exec(true) && this.output.length === this.program.length) {
+        return a;
+      }
+    }
   }
 }
