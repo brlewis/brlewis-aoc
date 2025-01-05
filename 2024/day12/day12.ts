@@ -22,8 +22,8 @@ function expand(
   seen.add(index);
   dirs4.forEach(({ dx, dy }, i) => {
     if (grid.get(x + dx, y + dy) !== region.species) {
-      region.fences[i] ??= new Set();
-      region.fences[i].add(grid.index(x, y));
+      const fence = region.fences[i] ??= new Set();
+      fence.add(grid.index(x, y));
       region.perimeter++;
     } else {
       expand(grid, x + dx, y + dy, region, seen);
